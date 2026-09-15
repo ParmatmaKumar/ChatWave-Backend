@@ -16,6 +16,7 @@ const initializeSocket = require("./socket/socket");
 
 
 const app = express();
+const clientUrl = process.env.CLIENT_URL || "http://localhost:5173";
 
 
 // HTTP SERVER
@@ -25,7 +26,7 @@ const server = http.createServer(app);
 // MIDDLEWARE
 app.use(
     cors({
-        origin: "http://localhost:5173",
+        origin: clientUrl,
         credentials: true
     })
 );
@@ -62,7 +63,7 @@ const io = new Server(
     server,
     {
         cors: {
-            origin: "http://localhost:5173",
+            origin: clientUrl,
             methods: ["GET", "POST"],
             credentials: true
         }
